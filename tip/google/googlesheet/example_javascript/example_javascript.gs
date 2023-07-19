@@ -21,17 +21,19 @@ var tinypack = {
 
 
 function convertUnixEpochToDateTime(unixEpoch) {
-  const date = new Date(unixEpoch * 1000); 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; 
+  const date = new Date(unixEpoch * 1000);
+  const timeZoneOffsetInMinutes = date.getTimezoneOffset(); // Get the time zone offset in minutes
+  date.setMinutes(date.getMinutes() + timeZoneOffsetInMinutes); // Adjust the date by subtracting the time zone offset
+
   const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   const hour = date.getHours();
   const minute = date.getMinutes();
   const second = date.getSeconds();
 
   return [year, month, day, hour, minute, second];
 }
-
 
 
 
