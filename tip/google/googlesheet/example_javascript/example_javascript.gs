@@ -180,4 +180,26 @@ function getCrc16_verify(msg) {
   return crc_check.toString(16);
 }
 
+const is12HourFormat = new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: true })
+  .formatToParts(new Date())
+  .some(part => part.type === 'dayPeriod');
+
+//const hex_arr = [0x1, 0xA, 0x2F];
+//const length = hex_arr.length;
+//const hexString = HexArr2Str(hex_arr, length);
+//console.log(hexString);
+
+function HexArr2Str(hex_arr, length) {
+  let str = '';
+
+  for (let i = 0; i < length; i++) {
+    if (hex_arr[i] < 0x10) {
+      str += '0';
+    }
+    str += hex_arr[i].toString(16).toUpperCase();
+  }
+
+  return str;
+}
+
 
